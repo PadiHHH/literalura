@@ -8,12 +8,18 @@ public class Libro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(unique = true)
     private String title;
     private String author;
     private String language;
     private Integer download_count;
 
+    // Constructor sin argumentos (requerido por JPA)
+    public Libro() {
+    }
+
+    // Constructor
     public Libro(DatosLibro datosLibro) {
         this.title = datosLibro.title() != null ? datosLibro.title() : "Título desconocido";
         this.author = (datosLibro.authors() != null && !datosLibro.authors().isEmpty())
@@ -22,7 +28,9 @@ public class Libro {
         this.language = (datosLibro.languages() != null && !datosLibro.languages().isEmpty())
                 ? datosLibro.languages().get(0)
                 : "Idioma desconocido";
-        this.download_count = datosLibro.download_count() != null ? datosLibro.download_count() : 0;
+        this.download_count = datosLibro.download_count() != null
+                ? datosLibro.download_count()
+                : 0;
     }
 
     public Long getId() {
@@ -63,5 +71,15 @@ public class Libro {
 
     public void setDownload_count(Integer download_count) {
         this.download_count = download_count;
+    }
+
+    @Override
+    public String toString() {
+        return "Libro{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", language='" + language + '\'' +
+                ", download_count=" + download_count +
+                '}';
     }
 }

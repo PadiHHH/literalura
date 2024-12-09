@@ -8,11 +8,17 @@ public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(unique = true)
     private String name;
     private Integer birth_day;
     private Integer death_day;
 
+    // Constructor sin argumentos (requerido por JPA)
+    public Autor() {
+    }
+
+    // Constructor
     public Autor(DatosAutor datosAutor) {
         this.name = datosAutor.name();
         this.birth_day = datosAutor.birthday();
@@ -49,5 +55,14 @@ public class Autor {
 
     public void setDeath_day(Integer death_day) {
         this.death_day = death_day;
+    }
+
+    @Override
+    public String toString() {
+        return "Autor{" +
+                ", name='" + name + '\'' +
+                ", birth_day=" + birth_day +
+                ", death_day=" + death_day +
+                '}';
     }
 }
